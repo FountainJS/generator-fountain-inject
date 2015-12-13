@@ -1,7 +1,7 @@
 {
   "extends": "eslint:recommended",
   "ecmaFeatures": {
-    "modules": true
+    "modules": false
   },
   "env": {
     "es6": true,

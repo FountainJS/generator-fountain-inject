@@ -1,3 +1,5 @@
+'use strict';
+
 var fountain = require('fountain-generator');
 
 module.exports = fountain.Base.extend({
