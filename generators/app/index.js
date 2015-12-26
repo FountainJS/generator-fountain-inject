@@ -56,8 +56,14 @@ module.exports = fountain.Base.extend({
     },
 
     indexHtml: function () {
-      this.replaceInFile('src/index.html', /<\/head>/, { head: true });
-      this.replaceInFile('src/index.html', /<\/html>/, { head: false });
+      this.replaceInFile('src/index.html', /<\/head>/, {
+        head: true,
+        framework: this.props.framework
+      });
+      this.replaceInFile('src/index.html', /<\/html>/, {
+        head: false,
+        framework: this.props.framework
+      });
     }
   },
 
