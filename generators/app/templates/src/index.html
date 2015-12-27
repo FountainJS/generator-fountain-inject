@@ -7,9 +7,13 @@
     <!-- endbuild -->
 
     <!-- build:css({.tmp,src}) styles/app.css -->
+<%   if (css === 'css') { -%>
     <!-- inject:css -->
     <!-- css files will be automatically insert here -->
     <!-- endinject -->
+<%   } else { -%>
+    <link rel="stylesheet" href="index.css"/>
+<%   } -%>
     <!-- endbuild -->
   </head>
 <% } else { -%>
