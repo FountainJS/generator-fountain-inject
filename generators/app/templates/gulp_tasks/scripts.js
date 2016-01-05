@@ -1,15 +1,23 @@
-const path = require('path');
-
 const gulp = require('gulp');
+<% if (js === 'babel' || framework === 'react' && js === 'js') { -%>
 const babel = require('gulp-babel');
-const eslint = require('gulp-eslint');
+<% } -%>
+<% if (js === 'typescript') { -%>
+const typescript = require('gulp-typescript');
+const tsConf = require('../conf/ts.conf.json').compilerOptions;
+<% } -%>
 
 const conf = require('../conf/gulp.conf');
 
 gulp.task('scripts', scripts);
 
 function scripts() {
-  return gulp.src(path.join(conf.paths.src, '/**/*.js'))
+  return gulp.src(conf.path.src('**/*.js'))
+<% if (js === 'babel' || framework === 'react' && js === 'js') { -%>
     .pipe(babel())
-    .pipe(gulp.dest(path.join(conf.paths.tmp)));
+<% } -%>
+<% if (js === 'typescript') { -%>
+    .pipe(typescript(tsConf))
+<% } -%>
+    .pipe(gulp.dest(conf.path.tmp()));
 }
