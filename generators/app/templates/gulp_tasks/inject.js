@@ -13,8 +13,6 @@ gulp.task('inject', inject);
 function inject() {
 <% if (css === 'css') { -%>
   const injectStyles = gulp.src(conf.path.src('app/**/*.css'), { read: false });
-<% } else {-%>
-  const injectStyles = gulp.src(conf.path.tmp('index.css'), { read: false });
 <% } -%>
 
   const injectScripts = gulp.src([
@@ -22,7 +20,7 @@ function inject() {
     conf.path.tmp('**/!(index).js'),
     conf.path.tmp('**/index.js'),
 <% } else { -%>
-  conf.path.tmp('**/*.js'),
+    conf.path.tmp('**/*.js'),
 <% } -%>
     `!${conf.path.tmp('**/*.spec.js')}`
 <% if (framework === 'angular1') { -%>
@@ -38,7 +36,9 @@ function inject() {
   };
 
   return gulp.src(conf.path.src('index.html'))
+<% if (css === 'css') { -%>
     .pipe(gulpInject(injectStyles, injectOptions))
+<% } -%>
     .pipe(gulpInject(injectScripts, injectOptions))
     .pipe(wiredep(Object.assign({}, conf.wiredep)))
     .pipe(gulp.dest(conf.paths.tmp))
