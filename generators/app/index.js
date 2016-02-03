@@ -1,6 +1,7 @@
 'use strict';
 
 const fountain = require('fountain-generator');
+const path = require('path');
 
 module.exports = fountain.Base.extend({
   prompting() {
@@ -59,6 +60,28 @@ module.exports = fountain.Base.extend({
   },
 
   writing: {
+    transforms() {
+      this.replaceInFiles('src/**/*.js', (content, fileName) => {
+        const baseName = path.basename(fileName, '.js');
+        const componentName = baseName.substr(0, 1).toUpperCase() + baseName.substr(1);
+        // remove es2015 imports
+        let result = content.replace(/import .*\n\n?/g, '');
+        // remove commonjs requires
+        result = result.replace(/.*require\(.*\);\n\n?/g, '');
+        // remove exports of es2015 React components
+        result = result.replace(
+          /export class ([^\s]*) extends Component/g,
+          'class $1 extends React.Component'
+        );
+        // remove exports of createClass React components
+        result = result.replace(
+          /module\.exports = React\.createClass/,
+          `window.${componentName} = React.createClass`
+        );
+        return result;
+      });
+    },
+
     gulp() {
       this.copyTemplate(
         this.templatePath('gulp_tasks'),
@@ -68,8 +91,16 @@ module.exports = fountain.Base.extend({
     },
 
     indexHtml() {
-      this.replaceInFile('src/index-head.html', 'src/index.html', /<\/head>/);
-      this.replaceInFile('src/index-footer.html', 'src/index.html', /<\/html>/);
+      this.replaceInFileWithTemplate(
+        'src/index-head.html',
+        'src/index.html',
+        /<\/head>/
+      );
+      this.replaceInFileWithTemplate(
+        'src/index-footer.html',
+        'src/index.html',
+        /<\/html>/
+      );
     }
   },
 
