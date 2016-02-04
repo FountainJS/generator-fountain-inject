@@ -78,6 +78,15 @@ module.exports = fountain.Base.extend({
           /module\.exports = React\.createClass/,
           `window.${componentName} = React.createClass`
         );
+        // rename styles var for React inline style
+        result = result.replace(
+          /(var|const) styles =/g,
+          `$1 ${componentName}Styles =`
+        );
+        result = result.replace(
+          /style={styles\.(.*)}/g,
+          `style={${componentName}Styles.$1}`
+        );
         return result;
       });
     },
