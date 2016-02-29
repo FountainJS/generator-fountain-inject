@@ -1,6 +1,7 @@
 'use strict';
 
 const fountain = require('fountain-generator');
+const transforms = require('./transforms');
 
 module.exports = fountain.Base.extend({
   prompting() {
@@ -59,6 +60,8 @@ module.exports = fountain.Base.extend({
   },
 
   writing: {
+    transforms,
+
     gulp() {
       this.copyTemplate(
         this.templatePath('gulp_tasks'),
@@ -68,8 +71,16 @@ module.exports = fountain.Base.extend({
     },
 
     indexHtml() {
-      this.replaceInFile('src/index-head.html', 'src/index.html', /<\/head>/);
-      this.replaceInFile('src/index-footer.html', 'src/index.html', /<\/html>/);
+      this.replaceInFileWithTemplate(
+        'src/index-head.html',
+        'src/index.html',
+        /<\/head>/
+      );
+      this.replaceInFileWithTemplate(
+        'src/index-footer.html',
+        'src/index.html',
+        /<\/html>/
+      );
     }
   },
 
