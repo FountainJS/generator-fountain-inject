@@ -47,7 +47,7 @@ module.exports = function transforms() {
       result = result.replace(/(\.module.*\[).*(\])/g, '$1$2');
     } else {
       result = result.replace(
-        /(const .*|module\.exports) = ([\s\S]*?(?=\n\})\n})/g, // ok, this one is ugly...
+        /(const .*|module\.exports) = ([\s\S]*?\n\})/g, // ok, this one is ugly...
         `angular.module('app').component('${angular1ComponentName}', $2)`
       );
     }
