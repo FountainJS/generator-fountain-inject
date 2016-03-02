@@ -1,4 +1,5 @@
 const gulp = require('gulp');
+const browserSync = require('browser-sync');
 <% if (js === 'babel' || framework === 'react' && js === 'js') { -%>
 const babel = require('gulp-babel');
 <% } -%>
