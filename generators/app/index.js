@@ -72,6 +72,12 @@ module.exports = fountain.Base.extend({
 
     indexHtml() {
       this.replaceInFileWithTemplate(
+        this.templatePath('conf/gulp.conf.js'),
+        this.destinationPath('conf/gulp.conf.js'),
+        /exports.wiredep = {};/
+      );
+
+      this.replaceInFileWithTemplate(
         'src/index-head.html',
         'src/index.html',
         /<\/head>/
