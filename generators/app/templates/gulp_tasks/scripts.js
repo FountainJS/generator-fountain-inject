@@ -20,6 +20,5 @@ function scripts() {
 <% if (js === 'typescript') { -%>
     .pipe(typescript(tsConf))
 <% } -%>
-    .pipe(gulp.dest(conf.path.tmp()))
-    .pipe(browserSync.stream());
+    .pipe(gulp.dest(conf.path.tmp()));
 }
