@@ -74,7 +74,7 @@ module.exports = fountain.Base.extend({
       this.replaceInFileWithTemplate(
         this.templatePath('conf/gulp.conf.js'),
         this.destinationPath('conf/gulp.conf.js'),
-        /exports.wiredep = {};/
+        /$/
       );
 
       this.replaceInFileWithTemplate(
