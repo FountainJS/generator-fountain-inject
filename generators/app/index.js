@@ -32,10 +32,6 @@ module.exports = fountain.Base.extend({
         pkg.devDependencies['gulp-angular-filesort'] = '^1.1.1';
       }
 
-      if (this.props.js === 'babel' || this.props.js === 'js' && this.props.framework === 'react') {
-        pkg.devDependencies['gulp-babel'] = '^6.1.0';
-      }
-
       if (this.props.js === 'typescript') {
         pkg.devDependencies['gulp-typescript'] = '^2.10.0';
       }
