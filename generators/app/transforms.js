@@ -6,7 +6,7 @@ module.exports = function transforms() {
   this.replaceInFiles('src/**/*.{js,ts,tsx}', (content, fileName) => {
     const baseName = path.basename(fileName, path.extname(fileName));
     const reactComponentName = baseName.substr(0, 1).toUpperCase() + baseName.substr(1);
-    const angular1ComponentName = baseName === 'main' ? 'app' : 'techs' + reactComponentName;
+    const angular1ComponentName = baseName === 'main' ? 'app' : `techs${reactComponentName}`;
     // remove es2015 imports
     let result = content.replace(/import .*\n\n?/g, '');
     // remove commonjs requires
