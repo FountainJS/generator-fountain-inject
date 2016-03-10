@@ -49,8 +49,8 @@ module.exports = fountain.Base.extend({
       this.mergeJson('bower.json', {
         name: 'fountain-inject',
         version: '0.0.1',
-        dependencies: Object.assign({}, dependencies),
-        devDependencies: Object.assign({}, devDependencies)
+        dependencies,
+        devDependencies
       });
     }
   },
