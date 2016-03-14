@@ -12,9 +12,9 @@ module.exports = fountain.Base.extend({
   configuring: {
     pkg() {
       let dependencies;
-      let devDependencies = {};
+      const devDependencies = {};
 
-      this.updateJson('package.json', function (packageJson) {
+      this.updateJson('package.json', packageJson => {
         dependencies = packageJson.dependencies;
         delete packageJson.dependencies;
         return packageJson;
@@ -24,7 +24,7 @@ module.exports = fountain.Base.extend({
         devDependencies: {
           'gulp-inject': '^3.0.0',
           'main-bower-files': '^2.9.0',
-          wiredep: '^2.2.2'
+          'wiredep': '^2.2.2'
         }
       };
 
@@ -49,8 +49,8 @@ module.exports = fountain.Base.extend({
       this.mergeJson('bower.json', {
         name: 'fountain-inject',
         version: '0.0.1',
-        dependencies: dependencies,
-        devDependencies: devDependencies
+        dependencies,
+        devDependencies
       });
     }
   },
@@ -62,7 +62,7 @@ module.exports = fountain.Base.extend({
       this.copyTemplate(
         this.templatePath('gulp_tasks'),
         this.destinationPath('gulp_tasks'),
-        { css: this.props.css }
+        {css: this.props.css}
       );
     },
 

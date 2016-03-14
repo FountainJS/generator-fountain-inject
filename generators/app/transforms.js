@@ -6,7 +6,7 @@ module.exports = function transforms() {
   this.replaceInFiles('src/**/*.{js,ts,tsx}', (content, fileName) => {
     const baseName = path.basename(fileName, path.extname(fileName));
     const reactComponentName = baseName.substr(0, 1).toUpperCase() + baseName.substr(1);
-    const angular1ComponentName = baseName === 'main' ? 'app' : 'techs' + reactComponentName;
+    const angular1ComponentName = (baseName === 'main' || baseName === 'hello') ? 'app' : `fountain${reactComponentName}`;
     // remove es2015 imports
     let result = content.replace(/import .*\n\n?/g, '');
     // remove commonjs requires
@@ -48,8 +48,8 @@ module.exports = function transforms() {
         result = result.replace(/(\.module.*\[).*(\])/g, '$1$2');
       } else {
         result = result.replace(
-          /(const .*|module\.exports) = ([\s\S]*?\n\})/g, // ok, this one is ugly...
-          `angular.module('app').component('${angular1ComponentName}', $2)`
+          /^((export )*const .*|module\.exports) = ([\s\S]*?\n\})/g, // ok, this one is ugly...
+          `angular.module('app').component('${angular1ComponentName}', $3)`
         );
       }
     }
