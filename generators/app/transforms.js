@@ -16,7 +16,7 @@ module.exports = function transforms() {
       const relativePath = relativeFilePath.split('/').map(() => '../').join('');
       result = result.replace(
         /^(?!\/\/\/ <reference path=)/g,
-        `/// <reference path="${relativePath}typings/tsd.d.ts" />\n\n`
+        `/// <reference path="${relativePath}typings/main.d.ts" />\n\n`
       );
     }
     // remove exports of es2015 or typescript
