@@ -40,11 +40,6 @@ module.exports = function transforms() {
       /style={styles\.(.*)}/g,
       `style={${reactComponentName}Styles.$1}`
     );
-    // remove centralized Angular 1 component declaration
-    if (this.props.framework === 'angular1' && baseName === 'index') {
-      result = result.replace(/\n\s+\.component[^;]*/g, '');
-      result = result.replace(/(\.module.*\[).*(\])/g, '$1$2');
-    }
     return result;
   });
 };
