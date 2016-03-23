@@ -6,7 +6,6 @@ module.exports = function transforms() {
   this.replaceInFiles('src/**/*.{js,ts,tsx}', (content, fileName) => {
     const baseName = path.basename(fileName, path.extname(fileName));
     const reactComponentName = baseName.substr(0, 1).toUpperCase() + baseName.substr(1);
-    const angular1ComponentName = (baseName === 'main' || baseName === 'hello') ? 'app' : `fountain${reactComponentName}`;
     // remove es2015 imports
     let result = content.replace(/import .*\n\n?/g, '');
     // remove commonjs requires
@@ -17,7 +16,7 @@ module.exports = function transforms() {
       const relativePath = relativeFilePath.split('/').map(() => '../').join('');
       result = result.replace(
         /^(?!\/\/\/ <reference path=)/g,
-        `/// <reference path="${relativePath}typings/tsd.d.ts" />\n\n`
+        `/// <reference path="${relativePath}typings/main.d.ts" />\n\n`
       );
     }
     // remove exports of es2015 or typescript
@@ -41,18 +40,6 @@ module.exports = function transforms() {
       /style={styles\.(.*)}/g,
       `style={${reactComponentName}Styles.$1}`
     );
-    // remove centralized Angular 1 component declaration
-    if (this.props.framework === 'angular1') {
-      if (baseName === 'index') {
-        result = result.replace(/\n\s+\.component[^;]*/g, '');
-        result = result.replace(/(\.module.*\[).*(\])/g, '$1$2');
-      } else {
-        result = result.replace(
-          /^((export )*const .*|module\.exports) = ([\s\S]*?\n\})/g, // ok, this one is ugly...
-          `angular.module('app').component('${angular1ComponentName}', $3)`
-        );
-      }
-    }
     return result;
   });
 };

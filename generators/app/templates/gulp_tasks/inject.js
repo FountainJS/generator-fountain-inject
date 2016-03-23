@@ -14,7 +14,6 @@ function inject() {
 <% if (css === 'css') { -%>
   const injectStyles = gulp.src(conf.path.src('**/*.css'), { read: false });
 <% } -%>
-
   const injectScripts = gulp.src([
 <% if (framework === 'react') { -%>
     conf.path.tmp('**/!(index).js'),
@@ -31,7 +30,7 @@ function inject() {
 <% } -%>
 
   const injectOptions = {
-    ignorePath: [ conf.paths.src, conf.paths.tmp ],
+    ignorePath: [conf.paths.src, conf.paths.tmp],
     addRootSlash: false
   };
 
