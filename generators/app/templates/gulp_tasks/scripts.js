@@ -1,5 +1,4 @@
 const gulp = require('gulp');
-const browserSync = require('browser-sync');
 <% if (js === 'babel' || framework === 'react' && js === 'js') { -%>
 const babel = require('gulp-babel');
 <% } -%>
@@ -7,7 +6,6 @@ const babel = require('gulp-babel');
 const typescript = require('gulp-typescript');
 const tsConf = require('../conf/ts.conf.json').compilerOptions;
 <% } -%>
-
 const conf = require('../conf/gulp.conf');
 
 gulp.task('scripts', scripts);
