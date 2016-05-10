@@ -11,7 +11,7 @@ module.exports = function transforms() {
     // remove commonjs requires
     result = result.replace(/.*require\(.*\);\n\n?/g, '');
     // add TS reference in files which doesn't have one
-    if (this.props.js === 'typescript') {
+    if (this.options.js === 'typescript') {
       const relativeFilePath = path.relative(this.destinationPath('src'), fileName);
       const relativePath = relativeFilePath.split('/').map(() => '../').join('');
       result = result.replace(
