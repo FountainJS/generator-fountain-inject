@@ -4,11 +4,6 @@ const fountain = require('fountain-generator');
 const transforms = require('./transforms');
 
 module.exports = fountain.Base.extend({
-  prompting() {
-    this.options.modules = 'inject';
-    this.fountainPrompting();
-  },
-
   configuring: {
     pkg() {
       let dependencies;
@@ -29,21 +24,21 @@ module.exports = fountain.Base.extend({
         }
       };
 
-      if (this.props.framework === 'angular1') {
+      if (this.options.framework === 'angular1') {
         pkg.devDependencies['gulp-angular-filesort'] = '^1.1.1';
       }
 
-      if (this.props.js === 'typescript') {
+      if (this.options.js === 'typescript') {
         pkg.devDependencies['gulp-typescript'] = '^2.10.0';
       }
 
       this.mergeJson('package.json', pkg);
 
-      if (this.props.framework === 'react') {
+      if (this.options.framework === 'react') {
         delete dependencies['react-dom'];
       }
 
-      if (this.props.framework === 'angular1') {
+      if (this.options.framework === 'angular1') {
         devDependencies['angular-mocks'] = dependencies.angular;
       }
 
@@ -63,7 +58,7 @@ module.exports = fountain.Base.extend({
       this.copyTemplate(
         this.templatePath('gulp_tasks'),
         this.destinationPath('gulp_tasks'),
-        {css: this.props.css}
+        {css: this.options.css}
       );
     },
 
