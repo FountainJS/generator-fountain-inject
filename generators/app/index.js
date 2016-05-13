@@ -21,6 +21,9 @@ module.exports = fountain.Base.extend({
           'gulp-inject': '^3.0.0',
           'main-bower-files': '^2.9.0',
           'wiredep': '^2.2.2'
+        },
+        scripts: {
+          bower: 'bower'
         }
       };
 
