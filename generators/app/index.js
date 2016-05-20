@@ -51,6 +51,16 @@ module.exports = fountain.Base.extend({
         dependencies,
         devDependencies
       });
+
+      if (this.options.framework === 'react') {
+        this.mergeJson('bower.json', {
+          overrides: {
+            'todomvc-app-css': {
+              main: 'index.css'
+            }
+          }
+        });
+      }
     }
   },
 
