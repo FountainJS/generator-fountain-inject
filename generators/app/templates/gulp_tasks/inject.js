@@ -12,7 +12,7 @@ gulp.task('inject', inject);
 
 function inject() {
 <% if (css === 'css') { -%>
-  const injectStyles = gulp.src(conf.path.src('**/*.css'), { read: false });
+  const injectStyles = gulp.src(conf.path.src('**/*.css'), {read: false});
 <% } -%>
   const injectScripts = gulp.src([
 <% if (framework === 'react') { -%>
