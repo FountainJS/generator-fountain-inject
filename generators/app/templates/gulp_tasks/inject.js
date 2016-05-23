@@ -12,10 +12,16 @@ gulp.task('inject', inject);
 
 function inject() {
 <% if (css === 'css') { -%>
-  const injectStyles = gulp.src(conf.path.src('**/*.css'), { read: false });
+  const injectStyles = gulp.src(conf.path.src('**/*.css'), {read: false});
 <% } -%>
   const injectScripts = gulp.src([
 <% if (framework === 'react') { -%>
+<% if (sample === 'todoMVC') { -%>
+    conf.path.tmp('app/constants/*.js'),
+    conf.path.tmp('app/reducers/todos.js'),
+    conf.path.tmp('app/reducers/index.js'),
+    conf.path.tmp('app/actions/index.js'),
+<% } -%>
     conf.path.tmp('**/!(index).js'),
     conf.path.tmp('**/index.js'),
 <% } else { -%>
