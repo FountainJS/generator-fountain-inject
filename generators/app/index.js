@@ -52,7 +52,7 @@ module.exports = fountain.Base.extend({
         devDependencies
       });
 
-      if (this.options.framework === 'react') {
+      if (this.options.framework !== 'angular2' && this.options.sample === 'todoMVC') {
         this.mergeJson('bower.json', {
           overrides: {
             'todomvc-app-css': {
