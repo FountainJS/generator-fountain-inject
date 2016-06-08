@@ -34,7 +34,7 @@ module.exports = function transforms() {
     // remove exports of createClass React components
     result = result.replace(
       /module\.exports = React\.createClass/g,
-      `window.${reactComponentName} = React.createClass`
+      `var ${reactComponentName} = React.createClass`
     );
     // rename styles var for React inline style
     result = result.replace(
