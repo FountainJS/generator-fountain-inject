@@ -6,8 +6,13 @@ module.exports = function transforms() {
   this.replaceInFiles('src/**/*.{js,ts,tsx}', (content, fileName) => {
     const baseName = path.basename(fileName, path.extname(fileName));
     const reactComponentName = baseName.substr(0, 1).toUpperCase() + baseName.substr(1);
+    // replace es2015 import of react-router
+    const identifier = this.options.js === 'js' ? 'var' : 'const';
+    let result = content.replace(/import {Router, Route, browserHistory} from 'react-router';/g, `${identifier} Router = ReactRouter.Router;\n${identifier} Route = ReactRouter.Route;\n${identifier} browserHistory = ReactRouter.browserHistory;`);
+    // replace commjs require of react-router
+    result = result.replace(/(var|const) (.*) = require\(('react-router')\).(.*);/g, `$1 $2 = ReactRouter.$2;`);
     // remove es2015 imports
-    let result = content.replace(/import .*\n\n?/g, '');
+    result = result.replace(/import .*\n\n?/g, '');
     // remove commonjs requires
     result = result.replace(/.*require\(.*\);\n\n?/g, '');
     // add TS reference in files which doesn't have one
@@ -29,7 +34,7 @@ module.exports = function transforms() {
     // remove exports of createClass React components
     result = result.replace(
       /module\.exports = React\.createClass/g,
-      `window.${reactComponentName} = React.createClass`
+      `var ${reactComponentName} = React.createClass`
     );
     // rename styles var for React inline style
     result = result.replace(
