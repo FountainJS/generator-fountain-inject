@@ -9,7 +9,7 @@ module.exports = function transforms() {
     // replace es2015 import of react-router
     const identifier = this.options.js === 'js' ? 'var' : 'const';
     let result = content.replace(/import {Router, Route, browserHistory} from 'react-router';/g, `${identifier} Router = ReactRouter.Router;\n${identifier} Route = ReactRouter.Route;\n${identifier} browserHistory = ReactRouter.browserHistory;`);
-    // replace commjs require of react-router
+    // replace commonjs require of react-router
     result = result.replace(/(var|const) (.*) = require\(('react-router')\).(.*);/g, `$1 $2 = ReactRouter.$2;`);
     // remove es2015 imports
     result = result.replace(/import .*\n\n?/g, '');

@@ -29,6 +29,7 @@ module.exports = fountain.Base.extend({
 
       if (this.options.framework === 'angular1') {
         pkg.devDependencies['gulp-angular-filesort'] = '^1.1.1';
+        devDependencies['angular-mocks'] = dependencies.angular;
       }
 
       if (this.options.js === 'typescript') {
@@ -39,10 +40,6 @@ module.exports = fountain.Base.extend({
 
       if (this.options.framework === 'react') {
         delete dependencies['react-dom'];
-      }
-
-      if (this.options.framework === 'angular1') {
-        devDependencies['angular-mocks'] = dependencies.angular;
       }
 
       this.mergeJson('bower.json', {
