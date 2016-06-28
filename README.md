@@ -4,6 +4,9 @@
   </a>
 </p>
 
+[![Build Status](https://travis-ci.org/FountainJS/generator-fountain-inject.svg?branch=master)](https://travis-ci.org/FountainJS/generator-fountain-inject)
+[![codecov](https://codecov.io/gh/FountainJS/generator-fountain-inject/branch/master/graph/badge.svg)](https://codecov.io/gh/FountainJS/generator-fountain-inject)
+
 # Fountain Inject Generator
 
 Yeoman 'fountain' generator which handle the script injection.
