@@ -4,7 +4,7 @@ const babel = require('gulp-babel');
 <% } -%>
 <% if (js === 'typescript') { -%>
 const typescript = require('gulp-typescript');
-const tsConf = require('../conf/ts.conf.json').compilerOptions;
+const tsConf = require('../tsconfig.json').compilerOptions;
 <% } -%>
 const conf = require('../conf/gulp.conf');
 
