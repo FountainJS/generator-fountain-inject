@@ -12,7 +12,7 @@ const pkg = {
     'bower': '^1.7.9',
     'gulp-inject': '^3.0.0',
     'main-bower-files': '^2.9.0',
-    'wiredep': '^2.2.2'
+    'wiredep': '^4.0.0'
   },
   scripts: {
     bower: 'bower'
