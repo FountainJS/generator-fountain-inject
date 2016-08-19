@@ -9,7 +9,7 @@
 
 # Fountain Inject Generator
 
-Yeoman 'fountain' generator which handle the script injection.
+Yeoman Fountain generator which handle the script injection.
 
 ## Usage
 
