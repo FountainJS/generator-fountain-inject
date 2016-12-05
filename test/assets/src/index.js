@@ -1,4 +1,3 @@
-/// <reference path="../../typings/index.d.ts" />
 import {Router, Route, browserHistory} from 'react-router';
 var Router = require('react-router').Router;
 import 'app.js';

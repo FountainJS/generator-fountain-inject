@@ -15,15 +15,6 @@ module.exports = function transforms() {
     result = result.replace(/import .*\n\n?/g, '');
     // remove commonjs requires
     result = result.replace(/.*require\(.*\);\n\n?/g, '');
-    // add TS reference in files which doesn't have one
-    if (this.options.js === 'typescript') {
-      const relativeFilePath = path.relative(this.destinationPath('src'), fileName);
-      const relativePath = relativeFilePath.split('/').map(() => '../').join('');
-      result = result.replace(
-        /^(?!\/\/\/ <reference path=)/g,
-        `/// <reference path="${relativePath}typings/index.d.ts" />\n\n`
-      );
-    }
     // remove exports of es2015 or typescript
     result = result.replace(/export /g, '');
     // remove exports of es2015 React components
