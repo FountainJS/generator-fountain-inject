@@ -60,7 +60,7 @@ test(`Add 'gulp-angular-filesort' to package.json and set bower.json`, t => {
 
 test(`Add 'gulp-typescript' to package.json and set bower.json`, t => {
   const expectedPkg = _.merge(pkg, {
-    devDependencies: {'gulp-typescript': '^2.10.0'}
+    devDependencies: {'gulp-typescript': '^3.1.3'}
   });
   context.updateJson['package.json'] = {
     dependencies: {angular: '^2.0.0-rc.3'}
