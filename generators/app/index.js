@@ -17,9 +17,9 @@ module.exports = fountain.Base.extend({
 
       const pkg = {
         devDependencies: {
-          'bower': '^1.7.9',
-          'gulp-inject': '^3.0.0',
-          'main-bower-files': '^2.9.0',
+          'bower': '^1.8.0',
+          'gulp-inject': '^4.2.0',
+          'main-bower-files': '^2.13.1',
           'wiredep': '^4.0.0'
         },
         scripts: {
@@ -33,7 +33,7 @@ module.exports = fountain.Base.extend({
       }
 
       if (this.options.js === 'typescript') {
-        pkg.devDependencies['gulp-typescript'] = '^3.1.3';
+        pkg.devDependencies['gulp-typescript'] = '^3.1.5';
       }
 
       this.mergeJson('package.json', pkg);
