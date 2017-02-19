@@ -33,7 +33,7 @@ module.exports = fountain.Base.extend({
       }
 
       if (this.options.js === 'typescript') {
-        pkg.devDependencies['gulp-typescript'] = '^2.10.0';
+        pkg.devDependencies['gulp-typescript'] = '^3.1.3';
       }
 
       this.mergeJson('package.json', pkg);
