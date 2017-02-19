@@ -12,9 +12,9 @@ module.exports = function transforms() {
     // replace commonjs require of react-router
     result = result.replace(/(var|const) (.*) = require\(('react-router')\).(.*);/g, `$1 $2 = ReactRouter.$2;`);
     // remove es2015 imports
-    result = result.replace(/import .*\n\n?/g, '');
+    result = result.replace(/import .*\r?\n\r?\n?/g, '');
     // remove commonjs requires
-    result = result.replace(/.*require\(.*\);\n\n?/g, '');
+    result = result.replace(/.*require\(.*\);\r?\n\r?\n?/g, '');
     // remove exports of es2015 or typescript
     result = result.replace(/export /g, '');
     // remove exports of es2015 React components
