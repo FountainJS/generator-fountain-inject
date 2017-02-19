@@ -3,6 +3,7 @@ const gulp = require('gulp');
 const babel = require('gulp-babel');
 <% } -%>
 <% if (js === 'typescript') { -%>
+const sourcemaps = require('gulp-sourcemaps');
 const typescript = require('gulp-typescript');
 const tsConf = require('../tsconfig.json').compilerOptions;
 <% } -%>
@@ -16,7 +17,9 @@ function scripts() {
     .pipe(babel())
 <% } -%>
 <% if (js === 'typescript') { -%>
+    .pipe(sourcemaps.init())
     .pipe(typescript(tsConf))
+    .pipe(sourcemaps.write('./sourcemaps'))
 <% } -%>
     .pipe(gulp.dest(conf.path.tmp()));
 }
