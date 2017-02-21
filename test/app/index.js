@@ -1,3 +1,4 @@
+const path = require('path');
 const chai = require('chai');
 const expect = chai.expect;
 const spies = require('chai-spies');
@@ -9,9 +10,9 @@ const TestUtils = require('fountain-generator').TestUtils;
 let context;
 const pkg = {
   devDependencies: {
-    'bower': '^1.7.9',
-    'gulp-inject': '^3.0.0',
-    'main-bower-files': '^2.9.0',
+    'bower': '^1.8.0',
+    'gulp-inject': '^4.2.0',
+    'main-bower-files': '^2.13.1',
     'wiredep': '^4.0.0'
   },
   scripts: {
@@ -27,7 +28,7 @@ const bower = {
 test.before(() => {
   context = TestUtils.mock('app');
   require('../../generators/app/index');
-  process.chdir('../../');
+  process.chdir(path.resolve(__dirname, '../../'));
 });
 
 test.beforeEach(() => {
@@ -47,20 +48,20 @@ test(`Add 'gulp-angular-filesort' to package.json and set bower.json`, t => {
     devDependencies: {'gulp-angular-filesort': '^1.1.1'}
   });
   context.updateJson['package.json'] = {
-    dependencies: {angular: '^1.5.0'}
+    dependencies: {angular: '^1.6.4'}
   };
   TestUtils.call(context, 'configuring.pkg', {framework: 'angular1', js: 'js'});
   t.deepEqual(context.mergeJson['package.json'], expectedPkg);
   const expectedBower = _.merge(bower, {
-    dependencies: {angular: '^1.5.0'},
-    devDependencies: {'angular-mocks': '^1.5.0'}
+    dependencies: {angular: '^1.6.4'},
+    devDependencies: {'angular-mocks': '^1.6.4'}
   });
   t.deepEqual(context.mergeJson['bower.json'], expectedBower);
 });
 
 test(`Add 'gulp-typescript' to package.json and set bower.json`, t => {
   const expectedPkg = _.merge(pkg, {
-    devDependencies: {'gulp-typescript': '^3.1.3'}
+    devDependencies: {'gulp-typescript': '^3.1.5'}
   });
   context.updateJson['package.json'] = {
     dependencies: {angular: '^2.0.0-rc.3'}
